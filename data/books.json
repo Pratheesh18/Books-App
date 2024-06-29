@@ -1,0 +1,63 @@
+[
+    {
+      "id": 1,
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "description": "A novel set in the American South during the 1930s, dealing with the issues of racial injustice and moral growth."
+    },
+    {
+      "id": 2,
+      "title": "1984",
+      "author": "George Orwell",
+      "description": "A dystopian novel about a totalitarian regime, surveillance, and the loss of individual freedom."
+    },
+    {
+      "id": 3,
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "description": "A novel set in the Roaring Twenties, exploring themes of decadence, idealism, resistance to change, social upheaval, and excess."
+    },
+    {
+      "id": 4,
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "description": "A romantic novel following the life of Elizabeth Bennet as she navigates issues of manners, morality, education, and marriage in early 19th-century England."
+    },
+    {
+      "id": 5,
+      "title": "The Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "description": "A novel about a teenager's existential crisis, dealing with themes of innocence, identity, belonging, loss, and connection."
+    },
+    {
+      "id": 6,
+      "title": "To the Lighthouse",
+      "author": "Virginia Woolf",
+      "description": "A modernist novel exploring themes of time, memory, subjectivity, and the passage of life."
+    },
+    {
+      "id": 7,
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "description": "A fantasy novel about the adventures of Bilbo Baggins, a hobbit who embarks on a quest to reclaim the Lonely Mountain and its treasure."
+    },
+    {
+      "id": 8,
+      "title": "Moby-Dick",
+      "author": "Herman Melville",
+      "description": "A novel exploring themes of obsession, revenge, nature, and the human struggle against the elements."
+    },
+    {
+      "id": 9,
+      "title": "The Road",
+      "author": "Cormac McCarthy",
+      "description": "A post-apocalyptic novel following a father and son's journey through a desolate landscape, exploring themes of survival, humanity, and hope."
+    },
+    {
+      "id": 10,
+      "title": "The Bell Jar",
+      "author": "Sylvia Plath",
+      "description": "A semi-autobiographical novel about a young woman's descent into mental illness, exploring themes of identity, depression, and societal expectations."
+    }
+  ]
+  
