@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Book } from '../types/types';
-import axios , {AxiosResponse} from 'axios';
+import axios from 'axios';
 
 interface AddBookModalProps {
   onAddBook: (book: Book) => void;
@@ -14,32 +14,27 @@ const AddBookModal: React.FC<AddBookModalProps> = ({ onAddBook, onClose }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     if (!title || !author) {
       setError('Title and author are required.');
       return;
     }
-  
+
     try {
-      const response: AxiosResponse<Book> = await axios.post<Book>('http://localhost:3001/books', {
+      const response = await axios.post<Book>('http://localhost:3001/books', {
         title,
         author,
       });
-  
-      console.log("Request body", { title, author });
-  
-      if (response.status === 201) {
-        const newBook = response.data;
-        console.log("Response", newBook);
-  
-        onAddBook(newBook);
-        onClose();
-        setTitle('');
-        setAuthor('');
-      } else {
-        const errorMessage = response.data || 'Failed to add book.';
-        setError(`Failed to add book: ${errorMessage}`);
-      }
+
+      console.log('Request body', { title, author });
+
+      const newBook = response.data;
+      console.log('Response', newBook);
+
+      onAddBook(newBook);
+      onClose();
+      setTitle('');
+      setAuthor('');
     } catch (err) {
       console.error('Error adding book:', err);
       let errorMessage = 'Error adding book. Please try again later.';

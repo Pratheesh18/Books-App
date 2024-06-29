@@ -9,6 +9,7 @@ const BookList: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false); // State to manage modal visibility
 
   const booksPerPage = 10;
 
@@ -16,9 +17,6 @@ const BookList: React.FC = () => {
     fetchBooks();
   }, [currentPage]);
 
-  useEffect(() => {
-    fetchBooks();
-  }, []);
 
   const fetchBooks = async () => {
     try {
@@ -29,7 +27,7 @@ const BookList: React.FC = () => {
       const data: Book[] = await response.json();
       console.log('Fetched books:', data);
       setBooks(data);
-      setLoading(false); 
+      setLoading(false);
     } catch (error) {
       console.error('Error fetching books:', error);
     }
@@ -39,16 +37,13 @@ const BookList: React.FC = () => {
     setBooks([...books, newBook]);
   };
 
-  const openModal = () => setLoading(true);
-  const closeModal = () => setLoading(false);
+  const openModal = () => setShowModal(true); 
+  const closeModal = () => setShowModal(false); 
 
-  
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
 
-
-  
   const totalPages = Math.ceil(books.length / booksPerPage);
 
   const paginate = (pageNumber: number) => {
@@ -96,12 +91,16 @@ const BookList: React.FC = () => {
           currentPage={currentPage}
           paginate={paginate}
         />
+        {showModal && (
+          <AddBookModal onAddBook={handleAddBook} onClose={closeModal} />
+        )}
       </div>
     </div>
   );
 };
 
 export default BookList;
+
 
 
 
