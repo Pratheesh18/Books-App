@@ -26,11 +26,7 @@ const AddBookModal: React.FC<AddBookModalProps> = ({ onAddBook, onClose }) => {
         author,
       });
 
-      console.log('Request body', { title, author });
-
       const newBook = response.data;
-      console.log('Response', newBook);
-
       onAddBook(newBook);
       onClose();
       setTitle('');

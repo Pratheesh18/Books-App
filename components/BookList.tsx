@@ -25,7 +25,6 @@ const BookList: React.FC = () => {
     try {
       const response = await axios.get<Book[]>('http://localhost:3001/books');
       const data = response.data;
-      console.log('Fetched books:', data);
       setBooks(data);
     } catch (error) {
       console.error('Error fetching books:', error);
