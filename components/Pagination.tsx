@@ -17,8 +17,8 @@ const Pagination : React.FC<PaginationProps> = ({totalPages , currentPage , pagi
             <li key={number}>
               <button
                 onClick={() => paginate(number)}
-                className={`py-2 px-3 text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-100 hover:text-gray-700 ${currentPage === number ? 'bg-blue-500 text-white' : ''}`}
-              >
+                className={`py-2 px-3 text-white bg-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 ${currentPage === number ? 'bg-blue-700' : ''}`}
+                >
                 {number}
               </button>
             </li>
