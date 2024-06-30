@@ -55,6 +55,7 @@ const AddBookModal: React.FC<AddBookModalProps> = ({ onAddBook, onClose }) => {
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              autoComplete='off'
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
@@ -67,6 +68,7 @@ const AddBookModal: React.FC<AddBookModalProps> = ({ onAddBook, onClose }) => {
               id="author"
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
+              autoComplete='off'
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
