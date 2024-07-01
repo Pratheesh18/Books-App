@@ -1,6 +1,6 @@
 'use client' 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useCallback } from 'react';
 import { Book } from '../types/types';
 import AddBookModal from './AddBookModal';
 import Pagination from './Pagination';
@@ -13,20 +13,48 @@ const BookList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [sortOrder , setSortOrder] = useState<'asc'|'desc'> ('asc');
+  const [keyword , setKeyword] = useState('');
+  const [debounceKeyword , setDebounceKeyword] = useState('');
+
 
 
   const booksPerPage = 10;
 
   useEffect(() => {
     fetchBooks();
-  }, [sortOrder]);
+  }, [sortOrder , debounceKeyword]);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebounceKeyword(keyword);
+    }, 500);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [keyword]);
+
+  const debounce = (func:Function , delay:number) => {
+    let timeoutId : NodeJS.Timeout;
+    return (...args:any[]) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        func(...args);
+      },delay);
+    };
+  };
 
 
   const fetchBooks = async () => {
     setLoading(true); 
     try {
       const response = await axios.get<Book[]>('http://localhost:3001/books');
-      const data = response.data;
+      let data = response.data;
+      if(debounceKeyword){
+        data = data.filter(book =>
+          book.title.toLowerCase().includes(debounceKeyword.toLowerCase())
+        );
+      }
       const sortedBooks = data.sort((a, b) => {
         return sortOrder === 'asc'
           ? a.title.localeCompare(b.title, 'en-US', { sensitivity: 'base' })
@@ -67,6 +95,11 @@ const BookList: React.FC = () => {
   const handleSort = () => {
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
+
+
+  const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(event.target.value);
+  };
   
 
   return (
@@ -76,7 +109,14 @@ const BookList: React.FC = () => {
         <h2 className="text-2xl font-bold mb-4 text-center">
           Book List
         </h2>
-        <div className="flex flex-col sm:flex-row items-center w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row items-center w-full sm:w-auto mb-4">
+          <input
+            type="text"
+            value={keyword}
+            onChange={handleSearchInputChange}
+            placeholder="Search by title..."
+            className="border border-gray-300 rounded-md py-2 px-4 mb-2 sm:mb-0 sm:mr-2 w-full sm:w-auto"
+          />
           <button
             onClick={handleSort}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full sm:w-auto mb-2 sm:mb-0 sm:mr-2"
