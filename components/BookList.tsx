@@ -63,33 +63,23 @@ const BookList: React.FC = () => {
     setCurrentPage(pageNumber);
   };
 
-  const sortBooks = (order: 'asc' | 'desc') => {
-    const sortedBooks = [...books].sort((a, b) => {
-      return order === 'asc'
-        ? a.title.localeCompare(b.title, 'en-US', { sensitivity: 'base' })
-        : b.title.localeCompare(a.title, 'en-US', { sensitivity: 'base' });
-    });
-    setBooks(sortedBooks);
-  };
 
   const handleSort = () => {
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
   
 
-
-
   return (
     <div className="bg-gray-100 min-h-screen pb-24 relative">
     <div className="container mx-auto px-4">
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-4 mt-4">
-        <h2 className="text-2xl font-bold mb-4 sm:mb-0 text-center flex-grow">
+      <div className="flex flex-col justify-center items-center mb-4 mt-4">
+        <h2 className="text-2xl font-bold mb-4 text-center">
           Book List
         </h2>
         <div className="flex flex-col sm:flex-row items-center w-full sm:w-auto">
           <button
             onClick={handleSort}
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full sm:w-auto mb-2 sm:mb-0 sm:mr-2"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full sm:w-auto mb-2 sm:mb-0 sm:mr-2"
           >
             Sort by Title ({sortOrder === 'asc' ? 'Ascending' : 'Descending'})
           </button>

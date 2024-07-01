@@ -11,28 +11,28 @@ const Pagination : React.FC<PaginationProps> = ({totalPages , currentPage , pagi
     const pageNumbers = Array.from({length:totalPages} , (_,i) => i+1);
 
     return(
-        <nav className="fixed bottom-0 left-0 w-full bg-white shadow-lg py-3">
-        <ul className="flex justify-center items-center space-x-2">
-          <li>
+      <nav className="fixed bottom-0 left-0 w-full bg-white shadow-lg py-3">
+      <ul className="flex flex-wrap justify-center items-center space-x-2">
+        <li className="mb-2 sm:mb-0">
+          <button
+            onClick={() => currentPage > 1 && paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`py-2 px-3 text-white bg-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+          >
+            Previous
+          </button>
+        </li>
+        {pageNumbers.map((number) => (
+          <li key={number} className="mb-2 sm:mb-0">
             <button
-                 onClick={() => currentPage > 1 && paginate(currentPage-1)}
-                 disabled = {currentPage === 1}
-                 className={`py-2 px-3 text-white bg-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed ' : ''}`}
+              onClick={() => paginate(number)}
+              className={`py-2 px-3 text-white bg-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 ${currentPage === number ? 'bg-blue-700' : ''}`}
             >
-              Previous
+              {number}
             </button>
           </li>
-          {pageNumbers.map((number) => (
-            <li key={number}>
-              <button
-                onClick={() => paginate(number)}
-                className={`py-2 px-3 text-white bg-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 ${currentPage === number ? 'bg-blue-700' : ''}`}
-                >
-                {number}
-              </button>
-            </li>
-          ))}
-         <li>
+        ))}
+        <li>
           <button
             onClick={() => currentPage < totalPages && paginate(currentPage + 1)}
             disabled={currentPage === totalPages}
@@ -41,8 +41,8 @@ const Pagination : React.FC<PaginationProps> = ({totalPages , currentPage , pagi
             Next
           </button>
         </li>
-        </ul>
-      </nav>
+      </ul>
+    </nav>
     )
 };
 
