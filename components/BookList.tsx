@@ -24,7 +24,7 @@ const BookList: React.FC = () => {
     fetchBooks();
   }, [sortOrder , debounceKeyword]);
 
-  useEffect(() => {
+  useEffect(() => { //implemented debounce function
     const handler = setTimeout(() => {
       setDebounceKeyword(keyword);
     }, 500);
@@ -33,17 +33,6 @@ const BookList: React.FC = () => {
       clearTimeout(handler);
     };
   }, [keyword]);
-
-  const debounce = (func:Function , delay:number) => {
-    let timeoutId : NodeJS.Timeout;
-    return (...args:any[]) => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        func(...args);
-      },delay);
-    };
-  };
-
 
   const fetchBooks = async () => {
     setLoading(true); 
@@ -107,7 +96,7 @@ const BookList: React.FC = () => {
     <div className="container mx-auto px-4">
       <div className="flex flex-col justify-center items-center mb-4 mt-4">
         <h2 className="text-2xl font-bold mb-4 text-center">
-          Book List
+          Books For Life
         </h2>
         <div className="flex flex-col sm:flex-row items-center w-full sm:w-auto mb-4">
           <input
@@ -155,11 +144,11 @@ const BookList: React.FC = () => {
           <p className="text-center">No books found.</p>
         </div>
       )}
-      <Pagination
+      {totalPages > 1 && <Pagination
         totalPages={totalPages}
         currentPage={currentPage}
         paginate={paginate}
-      />
+      />}
       {showModal && (
         <AddBookModal onAddBook={handleAddBook} onClose={closeModal} />
       )}
